@@ -9,17 +9,28 @@ interface Figura2D {
 
 class Retangulo {
 	public void desenhaRetangulo(Double largura, Double altura) {
-		System.out.println("Denho retangulo - Largura: " + largura + " Altura: " + altura);
+		System.out.println("Desenho retangulo - Largura: " + largura + " Altura: " + altura);
 	}
 }
 
+class Retangulo2 {
+	public static void desenhaRetangulo2(Double largura, Double altura) {
+		System.out.println("Desenho retangulo - Largura: " + largura + " Altura: " + altura);
+	}
+}
+
+class Retangulo3 {
+	public void desenhaRetangulo3(Double largura, Double altura) {
+		System.out.println("Desenho retangulo - Largura: " + largura + " Altura: " + altura);
+	}
+}
 interface Imagem2D {
 	Quadrado desenha(Double base, Double altura);
 }
 
 class Quadrado {
 	public Quadrado(Double base, Double altura) {
-		System.out.println("Denho quadrado - Base: " + base + " Altura: " + altura);
+		System.out.println("Desenho quadrado - Base: " + base + " Altura: " + altura);
 	}
 }
 
@@ -63,9 +74,31 @@ public class Figuras {
 		Retangulo retangulo = new Retangulo();
 		Figura2D fig2 = retangulo::desenhaRetangulo;
 		fig2.desenha(5.0, 2.5);
-
+		// method references por construtor
 		Imagem2D img = Quadrado::new;
 		img.desenha(5.0, 5.0);
+
+		// exemplificar caracteristicas do uso comum(calsse anonima) para lambda e para
+		// mthod references
+		Figura2D fig3 = new Figura2D() {
+
+			@Override
+			public void desenha(Double largura, Double altura) {
+				System.out.println("Anonimas " + largura + " " + altura);
+
+			}
+		};
+		fig3.desenha(10.2, 5.0);
+		
+		Figura2D fig4 = (largura, altura) -> System.out.println("Lambda " + altura + " " + largura);
+		fig4.desenha(2.0, 5.8);
+		
+		Figura2D fig5 = Retangulo2::desenhaRetangulo2;
+		fig5.desenha(2.9, 9.9);
+		
+		Retangulo3 rt = new Retangulo3();
+		Figura2D fig6 = rt::desenhaRetangulo3;
+		fig6.desenha(9.9, 1.11);
 
 	}
 
